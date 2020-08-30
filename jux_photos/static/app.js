@@ -23,7 +23,7 @@ var pswpInit = function (startsAtIndex) {
         };
 
         // Initializes and opens PhotoSwipe
-        var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, window.djangoAlbumImages, options);
-        gallery.init();
+        var album = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, window.djangoAlbumImages, options);
+        album.init();
     }
 }

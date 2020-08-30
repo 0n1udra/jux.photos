@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'external/photoswipe/photoswipe.css' %}"> 
+    <link rel="stylesheet" href="{% static 'external/photoswipe/default-skin/default-skin.css' %}"> 
+{% endblock %}
+
+{% block content %}
+
+    {% if album.is_visible %}
+        <article class="row">
+            <header class="album-title col s12 m12 l10 offset-l1">
+                <h1>{{ album.title }}</h1>
+            </header>
+            <section class="col s12 m12 l10 offset-l1">
+                <p>{{ album.description }}</p>
+
+                <div class="container">
+                    <div class="row">
+                        {% for item in images %}
+                        <a class="col s12 m3" href="javascript:pswpInit({{ forloop.counter0 }});">
+                            <img src="{{ item.thumb.url }}" class="responsive-img dpg-album-image" alt="{{ item.alt }}" />
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </section>
+            <footer class="col s12 m12 l10 offset-l1">
+            </footer>
+        </article>
+
+        <!-- PhotoSwipe -->
+        <!-- Root element of PhotoSwipe. Must have class pswp. -->
+        <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+            <!-- Background of PhotoSwipe. 
+                 It's a separate element as animating opacity is faster than rgba(). -->
+            <div class="pswp__bg"></div>
+
+            <!-- Slides wrapper with overflow:hidden. -->
+            <div class="pswp__scroll-wrap">
+
+                <!-- Container that holds slides. 
+                    PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                    Don't modify these 3 pswp__item elements, data is added later on. -->
+                <div class="pswp__container">
+                    <div class="pswp__item"></div>
+                    <div class="pswp__item"></div>
+                    <div class="pswp__item"></div>
+                </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    {% else %}
+        <h3>This album is unavailable.</h3>
+    {% endif %}
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        // build the json album images collection
+        window.djangoAlbumImages = [
+            {% for item in images %}
+                {
+                    src: '{{ item.image.url }}',
+                    w:  {{ item.width }},
+                    h:  {{ item.height }}
+                },
+            {% endfor %}
+        ];
+    </script>
+    <script src="{% static 'external/photoswipe/photoswipe.min.js' %}"></script> 
+    <script src="{% static 'external/photoswipe/photoswipe-ui-default.min.js' %}"></script>
+{% endblock %}

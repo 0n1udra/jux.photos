@@ -1,9 +1,18 @@
-﻿/* Custom fonts */
+﻿body {
+    background: url("images/background.jpg");
+
+    display: block;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+/* Custom fonts */
 @font-face {
-  font-family: Ubuntu;
-  src: local("Ubuntu"),
-       local("Ubuntu-Regular"),
-       url(Ubuntu-Regular.ttf);
+    font-family: Ubuntu;
+    src: local("Ubuntu"),
+    local("Ubuntu-Regular"),
+    url(Ubuntu-Regular.ttf);
 }
 
 @font-face {
@@ -35,6 +44,17 @@ strong {
     color: darkblue;
 }
 
+.footer-copyright {
+    font-size: .8rem;
+
+}
+
+.social-icon {
+    max-width:2rem;
+    max-height:2rem;
+    float: right;
+}
+
 /* Materializecss overrrides */
 .carousel-slider {
     height: 400px !important;
@@ -50,7 +70,7 @@ strong {
   /* This works in IE 8 & 9 too */
   /* ... but also 5, 6, 7 */
   filter: alpha(opacity=60);
-  
+
   /* Modern Browsers */
   opacity: 0.6;
 }
@@ -59,10 +79,6 @@ strong {
   font-style: italic;
 }
 
-.social-icon {
-    max-width:4rem;
-    max-height:4rem;
-}
 
 .dpg-album-card-image {
     width:300px;
@@ -72,3 +88,14 @@ strong {
 .dpg-album-card, .dpg-album-image {
     max-width:300px;
 }
+
+footer {
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    position: fixed;
+    height: 90px;
+    background: #2D2D2D;
+    border-top: 12px solid #3E3E3E;
+}
+

@@ -15,13 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 
-from main.views import home_view
+
+from album.views import album_view, AlbumDetail
+from blog.views import blog_view, about_view
+
+admin.autodiscover()
 
 urlpatterns = [
-    path('', home_view, name='home'),
+    path('', album_view, name='home'),
+    path('<slug:slug>', AlbumDetail.as_view(), name='album'),  # app.views.AlbumView.as_view()
+    path('blog/', blog_view, name='blog'),
+    path('about/', about_view, name='about'),
     path('admin/', admin.site.urls),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404 = 'main.views.handler_404'
+handler404 = 'album.views.handler_404'

@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 with open('/home/slime/juxphotos_key.txt', 'r') as file: SECRET_KEY = file.read()
 
@@ -21,6 +21,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR + MEDIA_URL
 STATIC_URL = '/static/'
 ROOT_URLCONF = 'jux_photos.urls'
 WSGI_APPLICATION = 'jux_photos.wsgi.application'
@@ -33,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main', 'blog', 'gallery',
+    'blog', 'album', 'material',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +51,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -60,6 +63,10 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
 ]
 
 DATABASES = {
@@ -93,7 +100,6 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-import os
 
 LOGGING = {
     'version': 1,
