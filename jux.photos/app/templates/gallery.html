@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        {% for album in albums %}
+
+        <div class="col s12 center-align">
+            <div class="card dpg-album-card hoverable z-depth-5">
+                <div class="card-image">
+                    <img src="{{ album.thumb.url }}" alt="{{ album.title }}" class="dpg-album-card-image" />
+                </div>
+
+                <div class="card-action black">
+
+                    <a class="waves-effect white-text" href="{% url 'album' album.slug %}">{{ album.title }}</a>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+
+<div class="pagination center">
+    <span class="step-links">
+        {% if albums.has_previous %}
+        <a href="?page={{ albums.previous_page_number }}" class="waves-effect waves-light btn btn-large">Previous</a>
+        {% endif %}
+
+        {% if albums.has_next %}
+        <a href="?page={{ albums.next_page_number }}" class="waves-effect waves-light btn btn-large">Next</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}
