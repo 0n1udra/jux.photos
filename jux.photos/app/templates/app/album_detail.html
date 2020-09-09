@@ -18,11 +18,13 @@
             <section class="album-description white-text col s12 m12 l10 offset-l1">
                 <h2>{{ album.description }}</h2>
 
+                <script src="{% static 'masonry.js' %}"></script>
+
                 <div class="container">
-                    <div class="row z-depth-1">
+                    <div class="row z-depth-1 album-images masonry">
                         {% for item in images %}
-                        <a class="col s12 m3 album-images hoverable" href="javascript:pswpInit({{ forloop.counter0 }});">
-                            <img src="{{ item.thumb.url }}" class="responsive-img dpg-album-image" alt="{{ item.alt }}" />
+                        <a class="col s12 m3 album-images masonry-brick" href="javascript:pswpInit({{ forloop.counter0 }});">
+                            <img src="{{ item.thumb.url }}" class="responsive-img dpg-album-image masonry-image" alt="{{ item.alt }}" />
                         </a>
                         {% endfor %}
                     </div>

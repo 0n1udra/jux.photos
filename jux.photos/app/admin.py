@@ -33,19 +33,32 @@ class AlbumModelAdmin(admin.ModelAdmin):
             file_upload_field = form.files['file_upload']
             files = file_upload_field.multi_file_upload
 
+
+
+            def check_has(item):
+                for file in AlbumImage.objects.all().values():
+                    print(file)
+                    if file['filename'] == item:
+                        return True
+
             for file in files:
                 file_content, filename = file[0], file[1]
-                filename = f'{album.slug}{str(uuid.uuid4())[-13:]}.jpg'
+                alt_name = f'{album.slug}{str(uuid.uuid4())[-13:]}.jpg'
                 file_path = jux_photos.settings.MEDIA_ROOT + 'albums/' + filename
-                img = AlbumImage(album=album, alt=filename)
+
+
+                img = AlbumImage(album=album, alt=alt_name)
+                img.filename = filename
                 try:
-                    img.image.save(filename, file_content)
+                    img.image.save(alt_name, file_content)
                 except:
                     # Sometimes there's an error saving the image, something to do with seek of closed file....
                     # This will try to delete the object then the image. Even though from my testing it'll still successfully upload the images...?
                     try: img.delete()
                     except: pass
-                    os.remove(file_path)
+
+                    try: os.remove(file_path)
+                    except: pass
 
             file_upload_field.multi_file_upload = []
             super(AlbumModelAdmin, self).save_model(request, obj, form, change)

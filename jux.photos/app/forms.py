@@ -11,6 +11,6 @@ class AlbumForm(forms.ModelForm):
         model = Album
         exclude = []
 
-    file_upload = MultiImageField(min_num=0, max_num=25, max_file_size=1024*1024*5)
+    file_upload = MultiImageField(min_num=0, max_num=30, max_file_size=1024*1024*5)
 
 

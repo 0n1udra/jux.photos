@@ -4,17 +4,16 @@
 {% block content %}
 
 <div class="container">
-    <div class="row">
+    <div class="masonry">
         {% for album in albums %}
 
-        <div class="col s12 center-align">
+        <div class="col s12 center-align masonry-brick gallery-view">
             <div class="card dpg-album-card hoverable z-depth-5">
                 <div class="card-image">
-                    <img src="{{ album.thumb.url }}" alt="{{ album.title }}" class="dpg-album-card-image" />
+                    <a href="{% url 'album' album.slug %}"><img src="{{ album.thumb.url }}" alt="{{ album.title }}" class="dpg-album-card-image" /></a>
                 </div>
 
                 <div class="card-action black">
-
                     <a class="waves-effect white-text" href="{% url 'album' album.slug %}">{{ album.title }}</a>
                 </div>
             </div>

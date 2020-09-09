@@ -11,13 +11,28 @@ body {
 display: flex;
   min-height: 100vh;
   flex-direction: column;
+  margin-bottom: 200px;
+}
+
+.masonry {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+.gallery-view{
+padding: 5px;
+}
+.masonry-brick {
+  flex: auto;
+  height: 400px;
+  margin: 5 8px 8px 0; /* Some gutter */
 }
 
 
 
 footer {
-flex: 1 0 auto;
-
+    flex: 1 0 auto;
     position: absolute;
     bottom: 0;
     padding-top: 50px;

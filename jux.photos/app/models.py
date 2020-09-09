@@ -30,6 +30,7 @@ class Album(models.Model):
 
 class AlbumImage(models.Model):
     image = models.ImageField(upload_to='albums')
+    filename = models.CharField(max_length=255, blank=True, default='')
     thumb = ImageSpecField(source='image', processors=[ResizeToFit(300)], format='JPEG', options={'quality': 70})
     album = models.ForeignKey(Album, related_name='album', on_delete=models.PROTECT)
     alt = models.CharField(max_length=255, default=uuid.uuid4)
